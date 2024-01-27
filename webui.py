@@ -363,7 +363,7 @@ while run_server:
 
         with gr.Tab("Swap Voice"):
             with gr.Row():
-                 swap_audio_filename = gr.Audio(label="Input audio.wav to swap voice", source="upload", type="filepath")
+                 swap_audio_filename = gr.Audio(label="Input audio.wav to swap voice", sources="upload", type="filepath")
             with gr.Row():
                  with gr.Column():
                      swap_tokenizer_lang = gr.Dropdown(tokenizer_language_list, label="Base Language Tokenizer", value=tokenizer_language_list[1])
@@ -378,7 +378,7 @@ while run_server:
 
         with gr.Tab("Clone Voice"):
             with gr.Row():
-                input_audio_filename = gr.Audio(label="Input audio.wav", source="upload", type="filepath")
+                input_audio_filename = gr.Audio(label="Input audio.wav", sources="upload", type="filepath")
             #transcription_text = gr.Textbox(label="Transcription Text", lines=1, placeholder="Enter Text of your Audio Sample here...")
             with gr.Row():
                 with gr.Column():
@@ -441,7 +441,7 @@ while run_server:
         button_stop_generation.click(fn=None, inputs=None, outputs=None, cancels=[gen_click])
         # Javascript hack to display modal confirmation dialog
         js = "(x) => confirm('Are you sure? This will remove all files from output folder')"
-        button_delete_files.click(None, None, hidden_checkbox, _js=js)
+        button_delete_files.click(None, None, hidden_checkbox, js=js)
         hidden_checkbox.change(delete_output_files, [hidden_checkbox], [hidden_checkbox])
 
         swap_voice_button.click(swap_voice_from_audio, inputs=[swap_audio_filename, speaker_swap, swap_tokenizer_lang, swap_seed, swap_batchcount], outputs=output_swap)
